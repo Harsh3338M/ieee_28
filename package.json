@@ -21,6 +21,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@ai-sdk/groq": "^3.0.24",
     "@auth/prisma-adapter": "^2.7.2",
     "@prisma/client": "^6.6.0",
     "@t3-oss/env-nextjs": "^0.12.0",
@@ -28,8 +29,12 @@
     "@trpc/client": "^11.0.0",
     "@trpc/react-query": "^11.0.0",
     "@trpc/server": "^11.0.0",
+    "ai": "^6.0.100",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "data-fns": "^1.1.0",
+    "date-fns": "^4.1.0",
+    "framer-motion": "^12.34.3",
     "lucide-react": "^0.575.0",
     "next": "^15.2.3",
     "next-auth": "5.0.0-beta.25",

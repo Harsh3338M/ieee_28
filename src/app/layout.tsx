@@ -5,6 +5,9 @@ import { Geist } from "next/font/google";
 
 import { TRPCReactProvider } from "@/trpc/react";
 import Header from "./_components/Header";
+import { AuthProvider } from "./_components/auth-provider";
+import SideNavigationBar from "@/components/SideNavigationBar";
+import { auth } from "@/server/auth";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -17,15 +20,24 @@ const geist = Geist({
   variable: "--font-geist-sans",
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+
+  const session = await auth();
+  const user_id =session?.user.id
   return (
     <html lang="en" className={`${geist.variable}`}>
-      <body>
+      <body className="bg-black">
         <TRPCReactProvider>
+         
+          <AuthProvider>
           <Header/>
-          {children}</TRPCReactProvider>
+          {user_id && <SideNavigationBar user_id={user_id} />}
+          <main className=" pl-20 pt-20 min-h-screen">
+          {children}
+        </main>
+        </AuthProvider></TRPCReactProvider>
       </body>
     </html>
   );
