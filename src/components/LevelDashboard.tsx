@@ -10,6 +10,7 @@ const LEVELS = [
   { id: 4, title: "XSS Attacks", status: "locked", topic: "Web Security" },
   { id: 5, title: "SQL Injection", status: "locked", topic: "Database" },
   { id: 6, title: "CORS", status: "locked", topic: "Database" },
+  { id: 7, title: "Rpg", status: "current", topic: "Special" ,special: true},
 ];
 
 const LevelDashboard = () => {
@@ -37,7 +38,7 @@ const LevelDashboard = () => {
                   </div>
                 )}
 
-                <Link href={`/lesson/${level.id}`}>
+                <Link href={`/${level.special?"level":"lesson"}/${level.id}`}>
                   <div className="relative group cursor-pointer">
                     {/* The 3D Base Shadow */}
                     <div className={`absolute inset-0 translate-y-2 rounded-full blur-sm opacity-30 ${

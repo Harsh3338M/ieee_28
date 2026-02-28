@@ -30,11 +30,19 @@ function PixelKnight({ state }: { state: string }) {
     idle:"float 2.8s ease-in-out infinite", hurt:"knightHurt 0.55s ease-out forwards",
     victory:"knightVictory 0.75s ease-out forwards", dead:"knightDead 1.3s ease-out forwards",
     cast:"float 1.4s ease-in-out infinite",
-  }[state] || "float 2.8s ease-in-out infinite";
+  }[state] ?? "float 2.8s ease-in-out infinite";
   const P = 4;
   const C = { sl:"#eef4fa", sm:"#c8dced", sd:"#8aaccc", sx:"#507a98", tl:"#5ddbb8", tm:"#20c997", td:"#0d9e75", bl:"#74b8f0", bm:"#4a90d9", bd:"#2860a8", sw:"#dcecf8", sh:"#ffffff", gd:"#f0d060", dk:"#1a3040" };
-  const r = (x:number,y:number,w:number,h:number,f:string,k?:string) => <rect key={k||`${x}${y}`} x={x*P} y={y*P} width={w*P} height={h*P} fill={f}/>;
-  return (
+  const r = (x:number, y:number, w:number, h:number, f:string, k?:string) => (
+    <rect 
+      key={k ?? `${x}-${y}-${w}-${h}-${f}`} 
+      x={x*P} 
+      y={y*P} 
+      width={w*P} 
+      height={h*P} 
+      fill={f}
+    />
+  );  return (
     <div style={{animation:anim,transformOrigin:"bottom center",position:"relative",filter:state==="idle"||state==="cast"?"drop-shadow(0 6px 14px rgba(32,120,90,0.22))":"none"}}>
       {state==="cast"&&<div style={{position:"absolute",left:"50%",top:"50%",width:70,height:70,borderRadius:"50%",border:"2px dashed rgba(32,201,151,0.65)",transform:"translate(-50%,-50%)",animation:"castRing 1.2s linear infinite",pointerEvents:"none",boxShadow:"0 0 14px rgba(32,201,151,0.35)"}}/>}
       <svg width={22*P} height={28*P} viewBox={`0 0 ${22*P} ${28*P}`} style={{imageRendering:"pixelated",display:"block"}}>
@@ -210,7 +218,7 @@ function OptionButton({label,index,letter,state,onClick,disabled}:{label:string;
   const sh=isC?"0 0 16px rgba(32,201,151,0.3),0 4px 14px rgba(0,0,0,0.05)":isW?"0 0 16px rgba(224,80,80,0.28),0 4px 14px rgba(0,0,0,0.05)":"0 2px 10px rgba(32,100,80,0.07)";
   return (
     <div style={{overflow:"hidden",borderRadius:10,animation:isR?"optionRemove 0.4s ease-out forwards":"none"}}>
-      <button onClick={onClick} disabled={isD||isR} style={{width:"100%",padding:"11px 15px",display:"flex",alignItems:"center",gap:12,background:bg,border:`1.5px solid ${brd}`,borderRadius:10,cursor:isD||isR?"not-allowed":"pointer",color:isR?"transparent":isC?"#0d7a58":isW?"#b03030":"#1a3a30",fontFamily:"'Nunito',sans-serif",fontSize:"1rem",textAlign:"left",transition:"all 0.17s",backdropFilter:"blur(6px)",boxShadow:sh,fontWeight:600}}
+      <button onClick={onClick} disabled={isD??isR} style={{width:"100%",padding:"11px 15px",display:"flex",alignItems:"center",gap:12,background:bg,border:`1.5px solid ${brd}`,borderRadius:10,cursor:isD||isR?"not-allowed":"pointer",color:isR?"transparent":isC?"#0d7a58":isW?"#b03030":"#1a3a30",fontFamily:"'Nunito',sans-serif",fontSize:"1rem",textAlign:"left",transition:"all 0.17s",backdropFilter:"blur(6px)",boxShadow:sh,fontWeight:600}}
         onMouseEnter={e=>{if(!isD&&!isR&&state==="idle"){e.currentTarget.style.borderColor="#20c997";e.currentTarget.style.background="rgba(32,201,151,0.08)";e.currentTarget.style.transform="translateX(5px)";e.currentTarget.style.boxShadow="0 4px 16px rgba(32,201,151,0.2)";}}}
         onMouseLeave={e=>{if(!isD&&!isR&&state==="idle"){e.currentTarget.style.borderColor="rgba(32,201,151,0.28)";e.currentTarget.style.background="rgba(255,255,255,0.88)";e.currentTarget.style.transform="translateX(0)";e.currentTarget.style.boxShadow="0 2px 10px rgba(32,100,80,0.07)";}}}
       >
