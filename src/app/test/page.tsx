@@ -1,5 +1,6 @@
 "use client"
 import PhishingSandbox from '@/components/PhishingSandbox'
+import SquidGame from '@/components/SquidGame'
 import Chapter from '@/harsh/chapter'
 import Cyber_surfer from '@/harsh/cyber_surfer'
 import CyberPuzzle from '@/harsh/CyberPuzzle'
