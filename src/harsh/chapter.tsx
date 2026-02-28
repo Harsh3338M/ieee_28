@@ -1,4 +1,4 @@
-import { CourseModule } from "@/components/course_module"
+import { CourseModule } from "./course_module"
 
 const modules = [
   {
@@ -35,7 +35,7 @@ const modules = [
   },
 ]
 
-export default function Home() {
+export default function Chapter() {
   return (
     <main className="min-h-screen bg-background px-4 py-10 md:px-6 lg:py-16">
       <div className="mx-auto flex max-w-3xl flex-col gap-6">

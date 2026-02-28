@@ -1,10 +1,15 @@
 "use client"
 import PhishingSandbox from '@/components/PhishingSandbox'
+import Chapter from '@/harsh/chapter'
+import CyberPuzzle from '@/harsh/CyberPuzzle'
 import React from 'react'
 
 const Page = () => {
   return (
-    <div><PhishingSandbox url='facebook.com' isSecure={false} contentTitle='hihello' onDetect={()=>console.log("hanji")}/ ></div>
+    <div>
+    <CyberPuzzle/>
+    
+    </div>
   )
 }
 

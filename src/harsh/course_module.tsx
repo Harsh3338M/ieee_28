@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import { ChevronUp, ChevronDown } from "lucide-react"
-import { ModuleIcon } from "@/components/module-icon"
-import { LessonItem } from "@/components/lesson-item"
+import { ModuleIcon } from "./module-icon"
+import { LessonItem } from "./lesson_item"
 
 interface CourseModuleProps {
   title: string
