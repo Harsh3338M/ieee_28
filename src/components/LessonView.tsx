@@ -1,11 +1,12 @@
 "use client";
 import React from 'react';
-import { ShieldCheck, ShieldAlert, X, CheckCircle2, AlertCircle, Trophy, ArrowRight } from 'lucide-react';
+import { ShieldCheck, ShieldAlert, X, CheckCircle2, AlertCircle, Trophy, ArrowRight,    } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import { useLesson } from '@/hooks/useLesson';
 import TactileButton from '@/app/_components/TactileButton';
 import { useRouter } from 'next/navigation';
 import { api } from '@/trpc/react';
+import Link from 'next/link';
 
 export const LessonView = ({ level,levelId,user_id }: { level:LevelData,levelId:number,user_id:string|null }) => {
   const { 
@@ -21,7 +22,11 @@ export const LessonView = ({ level,levelId,user_id }: { level:LevelData,levelId:
     },
     onError: (error) => {
       console.error("Failed to update:", error.message);
-    }
+    },
+    onSettled: () => {
+      // Always refetch after error or success to ensure we are synced with the DB
+      void utils.profile.getById.invalidate();
+    },
   });
 
   React.useEffect(() => {
@@ -39,7 +44,9 @@ export const LessonView = ({ level,levelId,user_id }: { level:LevelData,levelId:
   if (isFinished)
     { 
     
-    
+    if(level.megaLevel !== null){
+      return <div className='mt-20 flex justify-center text-white bg-red-600'>Go to mega level <Link href={`/level/${levelId}`} className='text-white'>Mega level-{levelId}</Link></div>
+    }
  
       return <CompletionState currentLevelId={levelId} />;
     }

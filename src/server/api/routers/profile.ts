@@ -53,4 +53,15 @@ export const profileRouter = createTRPCRouter({
       if (!profile) throw new Error("Profile not found");
       return profile;
     }),
+
+
+getAllUSers: publicProcedure.query(async ({ ctx }) => {
+  const profiles = await ctx.db.profile.findMany({
+    orderBy: [{xp: 'desc'}], // Sort by XP in descending order
+    take: 10, // Limit to top 10 users
+  });
+
+  return profiles;
+}   
+)
 });

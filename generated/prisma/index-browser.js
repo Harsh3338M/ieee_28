@@ -123,7 +123,13 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.PostScalarFieldEnum = {
   id: 'id',
-  name: 'name',
+  title: 'title',
+  content: 'content',
+  scamType: 'scamType',
+  imageUrl: 'imageUrl',
+  viewCount: 'viewCount',
+  upvotes: 'upvotes',
+  downvotes: 'downvotes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   createdById: 'createdById'
@@ -195,7 +201,14 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.ScamType = exports.$Enums.ScamType = {
+  PHISHING: 'PHISHING',
+  CRYPTO: 'CRYPTO',
+  WHATSAPP: 'WHATSAPP',
+  MARKETPLACE: 'MARKETPLACE',
+  JOB_OFFER: 'JOB_OFFER',
+  GENERAL: 'GENERAL'
+};
 
 exports.Prisma.ModelName = {
   Post: 'Post',

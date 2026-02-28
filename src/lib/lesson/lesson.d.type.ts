@@ -16,4 +16,5 @@ type Step = {
     title: string;
     badges: string[];
     points: number;
+    megaLevel?: int; // Optional field to indicate if this is a mega level
   }

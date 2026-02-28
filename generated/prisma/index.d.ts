@@ -45,6 +45,27 @@ export type VerificationToken = $Result.DefaultSelection<Prisma.$VerificationTok
 export type Profile = $Result.DefaultSelection<Prisma.$ProfilePayload>
 
 /**
+ * Enums
+ */
+export namespace $Enums {
+  export const ScamType: {
+  PHISHING: 'PHISHING',
+  CRYPTO: 'CRYPTO',
+  WHATSAPP: 'WHATSAPP',
+  MARKETPLACE: 'MARKETPLACE',
+  JOB_OFFER: 'JOB_OFFER',
+  GENERAL: 'GENERAL'
+};
+
+export type ScamType = (typeof ScamType)[keyof typeof ScamType]
+
+}
+
+export type ScamType = $Enums.ScamType
+
+export const ScamType: typeof $Enums.ScamType
+
+/**
  * ##  Prisma Client ʲˢ
  *
  * Type-safe database client for TypeScript & Node.js
@@ -1396,15 +1417,27 @@ export namespace Prisma {
 
   export type PostAvgAggregateOutputType = {
     id: number | null
+    viewCount: number | null
+    upvotes: number | null
+    downvotes: number | null
   }
 
   export type PostSumAggregateOutputType = {
     id: number | null
+    viewCount: number | null
+    upvotes: number | null
+    downvotes: number | null
   }
 
   export type PostMinAggregateOutputType = {
     id: number | null
-    name: string | null
+    title: string | null
+    content: string | null
+    scamType: $Enums.ScamType | null
+    imageUrl: string | null
+    viewCount: number | null
+    upvotes: number | null
+    downvotes: number | null
     createdAt: Date | null
     updatedAt: Date | null
     createdById: string | null
@@ -1412,7 +1445,13 @@ export namespace Prisma {
 
   export type PostMaxAggregateOutputType = {
     id: number | null
-    name: string | null
+    title: string | null
+    content: string | null
+    scamType: $Enums.ScamType | null
+    imageUrl: string | null
+    viewCount: number | null
+    upvotes: number | null
+    downvotes: number | null
     createdAt: Date | null
     updatedAt: Date | null
     createdById: string | null
@@ -1420,7 +1459,13 @@ export namespace Prisma {
 
   export type PostCountAggregateOutputType = {
     id: number
-    name: number
+    title: number
+    content: number
+    scamType: number
+    imageUrl: number
+    viewCount: number
+    upvotes: number
+    downvotes: number
     createdAt: number
     updatedAt: number
     createdById: number
@@ -1430,15 +1475,27 @@ export namespace Prisma {
 
   export type PostAvgAggregateInputType = {
     id?: true
+    viewCount?: true
+    upvotes?: true
+    downvotes?: true
   }
 
   export type PostSumAggregateInputType = {
     id?: true
+    viewCount?: true
+    upvotes?: true
+    downvotes?: true
   }
 
   export type PostMinAggregateInputType = {
     id?: true
-    name?: true
+    title?: true
+    content?: true
+    scamType?: true
+    imageUrl?: true
+    viewCount?: true
+    upvotes?: true
+    downvotes?: true
     createdAt?: true
     updatedAt?: true
     createdById?: true
@@ -1446,7 +1503,13 @@ export namespace Prisma {
 
   export type PostMaxAggregateInputType = {
     id?: true
-    name?: true
+    title?: true
+    content?: true
+    scamType?: true
+    imageUrl?: true
+    viewCount?: true
+    upvotes?: true
+    downvotes?: true
     createdAt?: true
     updatedAt?: true
     createdById?: true
@@ -1454,7 +1517,13 @@ export namespace Prisma {
 
   export type PostCountAggregateInputType = {
     id?: true
-    name?: true
+    title?: true
+    content?: true
+    scamType?: true
+    imageUrl?: true
+    viewCount?: true
+    upvotes?: true
+    downvotes?: true
     createdAt?: true
     updatedAt?: true
     createdById?: true
@@ -1549,7 +1618,13 @@ export namespace Prisma {
 
   export type PostGroupByOutputType = {
     id: number
-    name: string
+    title: string
+    content: string
+    scamType: $Enums.ScamType
+    imageUrl: string | null
+    viewCount: number
+    upvotes: number
+    downvotes: number
     createdAt: Date
     updatedAt: Date
     createdById: string
@@ -1576,7 +1651,13 @@ export namespace Prisma {
 
   export type PostSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    title?: boolean
+    content?: boolean
+    scamType?: boolean
+    imageUrl?: boolean
+    viewCount?: boolean
+    upvotes?: boolean
+    downvotes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     createdById?: boolean
@@ -1585,7 +1666,13 @@ export namespace Prisma {
 
   export type PostSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    title?: boolean
+    content?: boolean
+    scamType?: boolean
+    imageUrl?: boolean
+    viewCount?: boolean
+    upvotes?: boolean
+    downvotes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     createdById?: boolean
@@ -1594,7 +1681,13 @@ export namespace Prisma {
 
   export type PostSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
+    title?: boolean
+    content?: boolean
+    scamType?: boolean
+    imageUrl?: boolean
+    viewCount?: boolean
+    upvotes?: boolean
+    downvotes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     createdById?: boolean
@@ -1603,13 +1696,19 @@ export namespace Prisma {
 
   export type PostSelectScalar = {
     id?: boolean
-    name?: boolean
+    title?: boolean
+    content?: boolean
+    scamType?: boolean
+    imageUrl?: boolean
+    viewCount?: boolean
+    upvotes?: boolean
+    downvotes?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     createdById?: boolean
   }
 
-  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "createdById", ExtArgs["result"]["post"]>
+  export type PostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "scamType" | "imageUrl" | "viewCount" | "upvotes" | "downvotes" | "createdAt" | "updatedAt" | "createdById", ExtArgs["result"]["post"]>
   export type PostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -1627,7 +1726,13 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      name: string
+      title: string
+      content: string
+      scamType: $Enums.ScamType
+      imageUrl: string | null
+      viewCount: number
+      upvotes: number
+      downvotes: number
       createdAt: Date
       updatedAt: Date
       createdById: string
@@ -2056,7 +2161,13 @@ export namespace Prisma {
    */
   interface PostFieldRefs {
     readonly id: FieldRef<"Post", 'Int'>
-    readonly name: FieldRef<"Post", 'String'>
+    readonly title: FieldRef<"Post", 'String'>
+    readonly content: FieldRef<"Post", 'String'>
+    readonly scamType: FieldRef<"Post", 'ScamType'>
+    readonly imageUrl: FieldRef<"Post", 'String'>
+    readonly viewCount: FieldRef<"Post", 'Int'>
+    readonly upvotes: FieldRef<"Post", 'Int'>
+    readonly downvotes: FieldRef<"Post", 'Int'>
     readonly createdAt: FieldRef<"Post", 'DateTime'>
     readonly updatedAt: FieldRef<"Post", 'DateTime'>
     readonly createdById: FieldRef<"Post", 'String'>
@@ -8104,7 +8215,13 @@ export namespace Prisma {
 
   export const PostScalarFieldEnum: {
     id: 'id',
-    name: 'name',
+    title: 'title',
+    content: 'content',
+    scamType: 'scamType',
+    imageUrl: 'imageUrl',
+    viewCount: 'viewCount',
+    upvotes: 'upvotes',
+    downvotes: 'downvotes',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     createdById: 'createdById'
@@ -8238,6 +8355,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'ScamType'
+   */
+  export type EnumScamTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ScamType'>
+    
+
+
+  /**
+   * Reference to a field of type 'ScamType[]'
+   */
+  export type ListEnumScamTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ScamType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -8273,7 +8404,13 @@ export namespace Prisma {
     OR?: PostWhereInput[]
     NOT?: PostWhereInput | PostWhereInput[]
     id?: IntFilter<"Post"> | number
-    name?: StringFilter<"Post"> | string
+    title?: StringFilter<"Post"> | string
+    content?: StringFilter<"Post"> | string
+    scamType?: EnumScamTypeFilter<"Post"> | $Enums.ScamType
+    imageUrl?: StringNullableFilter<"Post"> | string | null
+    viewCount?: IntFilter<"Post"> | number
+    upvotes?: IntFilter<"Post"> | number
+    downvotes?: IntFilter<"Post"> | number
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
     createdById?: StringFilter<"Post"> | string
@@ -8282,7 +8419,13 @@ export namespace Prisma {
 
   export type PostOrderByWithRelationInput = {
     id?: SortOrder
-    name?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    scamType?: SortOrder
+    imageUrl?: SortOrderInput | SortOrder
+    viewCount?: SortOrder
+    upvotes?: SortOrder
+    downvotes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     createdById?: SortOrder
@@ -8294,7 +8437,13 @@ export namespace Prisma {
     AND?: PostWhereInput | PostWhereInput[]
     OR?: PostWhereInput[]
     NOT?: PostWhereInput | PostWhereInput[]
-    name?: StringFilter<"Post"> | string
+    title?: StringFilter<"Post"> | string
+    content?: StringFilter<"Post"> | string
+    scamType?: EnumScamTypeFilter<"Post"> | $Enums.ScamType
+    imageUrl?: StringNullableFilter<"Post"> | string | null
+    viewCount?: IntFilter<"Post"> | number
+    upvotes?: IntFilter<"Post"> | number
+    downvotes?: IntFilter<"Post"> | number
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
     createdById?: StringFilter<"Post"> | string
@@ -8303,7 +8452,13 @@ export namespace Prisma {
 
   export type PostOrderByWithAggregationInput = {
     id?: SortOrder
-    name?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    scamType?: SortOrder
+    imageUrl?: SortOrderInput | SortOrder
+    viewCount?: SortOrder
+    upvotes?: SortOrder
+    downvotes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     createdById?: SortOrder
@@ -8319,7 +8474,13 @@ export namespace Prisma {
     OR?: PostScalarWhereWithAggregatesInput[]
     NOT?: PostScalarWhereWithAggregatesInput | PostScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Post"> | number
-    name?: StringWithAggregatesFilter<"Post"> | string
+    title?: StringWithAggregatesFilter<"Post"> | string
+    content?: StringWithAggregatesFilter<"Post"> | string
+    scamType?: EnumScamTypeWithAggregatesFilter<"Post"> | $Enums.ScamType
+    imageUrl?: StringNullableWithAggregatesFilter<"Post"> | string | null
+    viewCount?: IntWithAggregatesFilter<"Post"> | number
+    upvotes?: IntWithAggregatesFilter<"Post"> | number
+    downvotes?: IntWithAggregatesFilter<"Post"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Post"> | Date | string
     createdById?: StringWithAggregatesFilter<"Post"> | string
@@ -8679,7 +8840,13 @@ export namespace Prisma {
   }
 
   export type PostCreateInput = {
-    name: string
+    title: string
+    content: string
+    scamType?: $Enums.ScamType
+    imageUrl?: string | null
+    viewCount?: number
+    upvotes?: number
+    downvotes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     createdBy: UserCreateNestedOneWithoutPostsInput
@@ -8687,14 +8854,26 @@ export namespace Prisma {
 
   export type PostUncheckedCreateInput = {
     id?: number
-    name: string
+    title: string
+    content: string
+    scamType?: $Enums.ScamType
+    imageUrl?: string | null
+    viewCount?: number
+    upvotes?: number
+    downvotes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     createdById: string
   }
 
   export type PostUpdateInput = {
-    name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    scamType?: EnumScamTypeFieldUpdateOperationsInput | $Enums.ScamType
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    viewCount?: IntFieldUpdateOperationsInput | number
+    upvotes?: IntFieldUpdateOperationsInput | number
+    downvotes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutPostsNestedInput
@@ -8702,7 +8881,13 @@ export namespace Prisma {
 
   export type PostUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    scamType?: EnumScamTypeFieldUpdateOperationsInput | $Enums.ScamType
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    viewCount?: IntFieldUpdateOperationsInput | number
+    upvotes?: IntFieldUpdateOperationsInput | number
+    downvotes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdById?: StringFieldUpdateOperationsInput | string
@@ -8710,21 +8895,39 @@ export namespace Prisma {
 
   export type PostCreateManyInput = {
     id?: number
-    name: string
+    title: string
+    content: string
+    scamType?: $Enums.ScamType
+    imageUrl?: string | null
+    viewCount?: number
+    upvotes?: number
+    downvotes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     createdById: string
   }
 
   export type PostUpdateManyMutationInput = {
-    name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    scamType?: EnumScamTypeFieldUpdateOperationsInput | $Enums.ScamType
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    viewCount?: IntFieldUpdateOperationsInput | number
+    upvotes?: IntFieldUpdateOperationsInput | number
+    downvotes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PostUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    scamType?: EnumScamTypeFieldUpdateOperationsInput | $Enums.ScamType
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    viewCount?: IntFieldUpdateOperationsInput | number
+    upvotes?: IntFieldUpdateOperationsInput | number
+    downvotes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdById?: StringFieldUpdateOperationsInput | string
@@ -9141,6 +9344,28 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type EnumScamTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ScamType | EnumScamTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ScamType[] | ListEnumScamTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ScamType[] | ListEnumScamTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumScamTypeFilter<$PrismaModel> | $Enums.ScamType
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -9157,9 +9382,20 @@ export namespace Prisma {
     isNot?: UserWhereInput
   }
 
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type PostCountOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    scamType?: SortOrder
+    imageUrl?: SortOrder
+    viewCount?: SortOrder
+    upvotes?: SortOrder
+    downvotes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     createdById?: SortOrder
@@ -9167,11 +9403,20 @@ export namespace Prisma {
 
   export type PostAvgOrderByAggregateInput = {
     id?: SortOrder
+    viewCount?: SortOrder
+    upvotes?: SortOrder
+    downvotes?: SortOrder
   }
 
   export type PostMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    scamType?: SortOrder
+    imageUrl?: SortOrder
+    viewCount?: SortOrder
+    upvotes?: SortOrder
+    downvotes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     createdById?: SortOrder
@@ -9179,7 +9424,13 @@ export namespace Prisma {
 
   export type PostMinOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    title?: SortOrder
+    content?: SortOrder
+    scamType?: SortOrder
+    imageUrl?: SortOrder
+    viewCount?: SortOrder
+    upvotes?: SortOrder
+    downvotes?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     createdById?: SortOrder
@@ -9187,6 +9438,9 @@ export namespace Prisma {
 
   export type PostSumOrderByAggregateInput = {
     id?: SortOrder
+    viewCount?: SortOrder
+    upvotes?: SortOrder
+    downvotes?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -9223,6 +9477,34 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type EnumScamTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ScamType | EnumScamTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ScamType[] | ListEnumScamTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ScamType[] | ListEnumScamTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumScamTypeWithAggregatesFilter<$PrismaModel> | $Enums.ScamType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumScamTypeFilter<$PrismaModel>
+    _max?: NestedEnumScamTypeFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -9237,21 +9519,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -9261,11 +9528,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
   }
 
   export type AccountProviderProviderAccountIdCompoundUniqueInput = {
@@ -9329,24 +9591,6 @@ export namespace Prisma {
   export type AccountSumOrderByAggregateInput = {
     expires_at?: SortOrder
     refresh_token_expires_in?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -9580,6 +9824,22 @@ export namespace Prisma {
     set?: string
   }
 
+  export type EnumScamTypeFieldUpdateOperationsInput = {
+    set?: $Enums.ScamType
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -9592,22 +9852,10 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPostsInput, UserUpdateWithoutPostsInput>, UserUncheckedUpdateWithoutPostsInput>
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type UserCreateNestedOneWithoutAccountsInput = {
     create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
     connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -9926,6 +10174,27 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type NestedEnumScamTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ScamType | EnumScamTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ScamType[] | ListEnumScamTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ScamType[] | ListEnumScamTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumScamTypeFilter<$PrismaModel> | $Enums.ScamType
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -9981,43 +10250,14 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+  export type NestedEnumScamTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ScamType | EnumScamTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ScamType[] | ListEnumScamTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ScamType[] | ListEnumScamTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumScamTypeWithAggregatesFilter<$PrismaModel> | $Enums.ScamType
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+    _min?: NestedEnumScamTypeFilter<$PrismaModel>
+    _max?: NestedEnumScamTypeFilter<$PrismaModel>
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -10035,6 +10275,31 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -10356,14 +10621,26 @@ export namespace Prisma {
   }
 
   export type PostCreateWithoutCreatedByInput = {
-    name: string
+    title: string
+    content: string
+    scamType?: $Enums.ScamType
+    imageUrl?: string | null
+    viewCount?: number
+    upvotes?: number
+    downvotes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type PostUncheckedCreateWithoutCreatedByInput = {
     id?: number
-    name: string
+    title: string
+    content: string
+    scamType?: $Enums.ScamType
+    imageUrl?: string | null
+    viewCount?: number
+    upvotes?: number
+    downvotes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -10555,7 +10832,13 @@ export namespace Prisma {
     OR?: PostScalarWhereInput[]
     NOT?: PostScalarWhereInput | PostScalarWhereInput[]
     id?: IntFilter<"Post"> | number
-    name?: StringFilter<"Post"> | string
+    title?: StringFilter<"Post"> | string
+    content?: StringFilter<"Post"> | string
+    scamType?: EnumScamTypeFilter<"Post"> | $Enums.ScamType
+    imageUrl?: StringNullableFilter<"Post"> | string | null
+    viewCount?: IntFilter<"Post"> | number
+    upvotes?: IntFilter<"Post"> | number
+    downvotes?: IntFilter<"Post"> | number
     createdAt?: DateTimeFilter<"Post"> | Date | string
     updatedAt?: DateTimeFilter<"Post"> | Date | string
     createdById?: StringFilter<"Post"> | string
@@ -10734,7 +11017,13 @@ export namespace Prisma {
 
   export type PostCreateManyCreatedByInput = {
     id?: number
-    name: string
+    title: string
+    content: string
+    scamType?: $Enums.ScamType
+    imageUrl?: string | null
+    viewCount?: number
+    upvotes?: number
+    downvotes?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -10803,21 +11092,39 @@ export namespace Prisma {
   }
 
   export type PostUpdateWithoutCreatedByInput = {
-    name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    scamType?: EnumScamTypeFieldUpdateOperationsInput | $Enums.ScamType
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    viewCount?: IntFieldUpdateOperationsInput | number
+    upvotes?: IntFieldUpdateOperationsInput | number
+    downvotes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PostUncheckedUpdateWithoutCreatedByInput = {
     id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    scamType?: EnumScamTypeFieldUpdateOperationsInput | $Enums.ScamType
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    viewCount?: IntFieldUpdateOperationsInput | number
+    upvotes?: IntFieldUpdateOperationsInput | number
+    downvotes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PostUncheckedUpdateManyWithoutCreatedByInput = {
     id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    scamType?: EnumScamTypeFieldUpdateOperationsInput | $Enums.ScamType
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    viewCount?: IntFieldUpdateOperationsInput | number
+    upvotes?: IntFieldUpdateOperationsInput | number
+    downvotes?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

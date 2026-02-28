@@ -1,41 +1,87 @@
 import { z } from "zod";
-
 import {
   createTRPCRouter,
   protectedProcedure,
   publicProcedure,
 } from "@/server/api/trpc";
+import { ScamType } from "../../../../generated/prisma";
+
+export const SCAM_CATEGORIES = ["PHISHING", "WHATSAPP", "GENERAL", "INVESTMENT"] as const;
 
 export const postRouter = createTRPCRouter({
-  hello: publicProcedure
-    .input(z.object({ text: z.string() }))
-    .query(({ input }) => {
-      return {
-        greeting: `Hello ${input.text}`,
-      };
-    }),
-
+  // 1. Create a Post
   create: protectedProcedure
-    .input(z.object({ name: z.string().min(1) }))
+    .input(
+      z.object({
+        title: z.string().min(1),
+        content: z.string().min(10),
+        scamType: z.nativeEnum(ScamType),
+        imageUrl: z.string().optional(),
+      })
+    )
     .mutation(async ({ ctx, input }) => {
       return ctx.db.post.create({
         data: {
-          name: input.name,
-          createdBy: { connect: { id: ctx.session.user.id } },
+          title: input.title,
+          content: input.content,
+          scamType: input.scamType,
+          imageUrl: input.imageUrl,
+          createdById: ctx.session.user.id,
         },
       });
     }),
 
-  getLatest: protectedProcedure.query(async ({ ctx }) => {
-    const post = await ctx.db.post.findFirst({
+  // 2. Voting Logic
+  vote: publicProcedure
+    .input(
+      z.object({
+        postId: z.number(),
+        type: z.enum(["UP", "DOWN"]),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.post.update({
+        where: { id: input.postId },
+        data: {
+          upvotes: input.type === "UP" ? { increment: 1 } : undefined,
+          downvotes: input.type === "DOWN" ? { increment: 1 } : undefined,
+        },
+      });
+    }),
+
+  // 3. Get All Posts (Feed)
+  getAll: publicProcedure.query(async ({ ctx }) => {
+    return ctx.db.post.findMany({
       orderBy: { createdAt: "desc" },
-      where: { createdBy: { id: ctx.session.user.id } },
+      include: {
+        createdBy: {
+          select: { name: true, image: true },
+        },
+      },
     });
-
-    return post ?? null;
   }),
 
-  getSecretMessage: protectedProcedure.query(() => {
-    return "you can now see this secret message!";
-  }),
-});
+  // 4. Increment View Count
+  incrementView: publicProcedure
+    .input(z.object({ id: z.number() }))
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.post.update({
+        where: { id: input.id },
+        data: { viewCount: { increment: 1 } },
+      });
+    }),
+
+  // 5. Get Single Post (Now correctly inside the router object)
+  getById: publicProcedure
+    .input(z.object({ id: z.number() }))
+    .query(async ({ ctx, input }) => {
+      return ctx.db.post.findUnique({
+        where: { id: input.id },
+        include: {
+          createdBy: {
+            select: { name: true, image: true },
+          },
+        },
+      });
+    }),
+}); // Router ends here

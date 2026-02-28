@@ -187,7 +187,7 @@ export default function Home() {
                   WHERE <span className="text-zinc-400">IDEAS</span> BECOME <span className="italic font-serif font-light">REALITY.</span>
                 </h1>
                 <p className="text-xl text-zinc-500 mb-10 max-w-xl leading-relaxed">
-                  HackHub is the central nervous system for the global hackathon community. Discover, track, and join the world's most innovative building events.
+                  HackHub is the central nervous system for the global hackathon community. Discover, track, and join the world&apos;s most innovative building events.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -273,7 +273,7 @@ export default function Home() {
                   <Search className="w-8 h-8 text-zinc-400" />
                 </div>
                 <h3 className="text-xl font-bold mb-2">No hackathons found</h3>
-                <p className="text-zinc-500">Try adjusting your search or filters to find what you're looking for.</p>
+                <p className="text-zinc-500">Try adjusting your search or filters to find what you&apos;re looking for.</p>
                 <button 
                   onClick={() => { setSearchQuery(''); setFilterType('All'); }}
                   className="mt-6 text-zinc-900 font-bold underline underline-offset-4"

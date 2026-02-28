@@ -4,7 +4,9 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { 
   User, Sparkles, ShoppingBag, ShieldCheck, 
-  Home, ChevronLeft, ChevronRight 
+  Home, ChevronLeft, ChevronRight, 
+  ChartColumnBig,
+  Users
 } from 'lucide-react';
 
 
@@ -19,6 +21,8 @@ const SideNavigationBar = ({user_id}:{user_id:string|undefined}) => {
     { label: 'Fact Checker', href: '/fact-checker', icon: ShieldCheck, color: 'text-orange-400' },
     { label: 'Shop', href: '/shop', icon: ShoppingBag, color: 'text-rose-400' },
     { label: 'Profile', href: `/profile/${user_id}`, icon: User, color: 'text-zinc-400' },
+    { label: 'Leaderboard', href: '/leaderboard', icon: ChartColumnBig, color: 'text-yellow-400' },
+    { label: 'Community', href: '/community', icon: Users, color: 'text-cyan-400' },
   ];
   return (
     <nav className={`

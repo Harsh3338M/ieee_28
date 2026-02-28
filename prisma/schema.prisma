@@ -18,14 +18,39 @@ datasource db {
 
 model Post {
   id        Int      @id @default(autoincrement())
-  name      String
+  title     String   // The catchy headline (e.g., "Beware of this WhatsApp Scam")
+  content   String   @db.Text // The full story
+  scamType  ScamType @default(GENERAL) // Categorization
+  
+  // Visual Evidence
+  imageUrl  String?  // Screenshots of the scammer's messages
+  
+  // Statistics
+  viewCount Int      @default(0)
+  
+  // Social/Reddit Features
+  upvotes   Int      @default(0)
+  downvotes Int      @default(0)
+  
+  // Metadata
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  createdBy   User   @relation(fields: [createdById], references: [id])
+  // Relationships
+  createdBy   User     @relation(fields: [createdById], references: [id])
   createdById String
+  
 
-  @@index([name])
+  @@index([title])
+}
+
+enum ScamType {
+  PHISHING
+  CRYPTO
+  WHATSAPP
+  MARKETPLACE
+  JOB_OFFER
+  GENERAL
 }
 
 // Necessary for Next auth
