@@ -5,6 +5,7 @@ import SquidGame from '@/components/SquidGame'
 import Chapter from '@/harsh/chapter'
 import Cyber_surfer from '@/harsh/cyber_surfer'
 import CyberPuzzle from '@/harsh/CyberPuzzle'
+
 import React from 'react'
 
 const Page = () => {
